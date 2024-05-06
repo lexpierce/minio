@@ -1,5 +1,6 @@
 services:
 - type: web
+  plan: pro
   name: minio-server
   healthCheckPath: /minio/health/live
   runtime: image
@@ -19,6 +20,8 @@ services:
     generateValue: true
   - key: MINIO_BROWSER
     value: "off"
+  - key: PORT
+    value: 9000
   # - key: CONSOLE_PORT
   #   value: 9090
 
