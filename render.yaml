@@ -19,7 +19,7 @@ services:
   - key: MINIO_BROWSER
     value: "off"
   - key: CONSOLE_PORT
-    value: 9001
+    value: 9090
 
 # - type: web
 #   name: minio-console
