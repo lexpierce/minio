@@ -5,7 +5,8 @@ services:
   runtime: image
   image:
     url: docker.io/minio/minio:latest
-  dockerCommand: minio server /data --console-address ":$CONSOLE_PORT"
+  # dockerCommand: minio server /data --console-address ":$CONSOLE_PORT"
+  dockerCommand: minio server /data
   autoDeploy: false
   disk:
     name: data
@@ -18,8 +19,8 @@ services:
     generateValue: true
   - key: MINIO_BROWSER
     value: "off"
-  - key: CONSOLE_PORT
-    value: 9090
+  # - key: CONSOLE_PORT
+  #   value: 9090
 
 # - type: web
 #   name: minio-console
