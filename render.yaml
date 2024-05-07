@@ -6,7 +6,7 @@ services:
   runtime: image
   image:
     url: docker.io/minio/minio:latest
-  dockerCommand: minio server /data --address $HOST:$PORT
+  dockerCommand: minio server /data --address $HOST:$PORT --console-address $HOST:$CONSOLE_PORT
   autoDeploy: false
   disk:
     name: data
@@ -17,12 +17,12 @@ services:
     generateValue: true
   - key: MINIO_ROOT_PASSWORD
     generateValue: true
-  - key: MINIO_OPTS
-    value: "--console-address :9001"
   - key: HOST
     value: "0.0.0.0"
   - key: PORT
     value: 9000
+  - key: CONSOLE_PORT
+    value: 9090
 
 # - type: web
 #   name: minio-console
