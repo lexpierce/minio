@@ -2,6 +2,7 @@ services:
 - type: web
   plan: standard
   name: minio-server
+  region: virginia
   healthCheckPath: /minio/health/live
   runtime: image
   image:
