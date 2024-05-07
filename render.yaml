@@ -6,7 +6,7 @@ services:
   runtime: image
   image:
     url: docker.io/minio/minio:latest
-  dockerCommand: minio server /data --address "$HOST:$PORT"
+  dockerCommand: minio server /data --address $HOST:$PORT
   autoDeploy: false
   disk:
     name: data
