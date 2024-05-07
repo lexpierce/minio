@@ -6,7 +6,6 @@ services:
   runtime: image
   image:
     url: docker.io/minio/minio:latest
-  # dockerCommand: minio server /data --console-address ":$CONSOLE_PORT"
   dockerCommand: minio server /data
   autoDeploy: false
   disk:
@@ -22,25 +21,25 @@ services:
     value: "off"
   - key: PORT
     value: 9000
-  # - key: CONSOLE_PORT
-  #   value: 9090
 
-# - type: web
-#   name: minio-console
-#   runtime: image
-#   image:
-#     url: minio/console:v0.30.0
-#   dockerCommand: /bin/bash -c CONSOLE_MINIO_SERVER=https://$MINIO_HOST.onrender.com ./console server --port $PORT
-#   autoDeploy: false
-#   envVars:
-#   - key: CONSOLE_PBKDF_PASSPHRASE
-#     generateValue: true
-#   - key: CONSOLE_PBKDF_SALT
-#     generateValue: true
-#   - key: PORT
-#     value: 9090
-#   - key: MINIO_HOST
-#     fromService:
-#       name: minio-server
-#       type: web
-#       property: host
+- type: web
+  name: minio-console
+  runtime: docker
+  repo: https://github.com/minio/console.git
+  dockerfilePath: ./Dockerfile
+  dockerContext: /
+  autoDeploy: false
+  envVars:
+  - key: CONSOLE_PBKDF_PASSPHRASE
+    generateValue: true
+  - key: CONSOLE_PBKDF_SALT
+    generateValue: true
+  - key: NODE_VERSION
+    value: 20.12.1
+  - key: CONSOLE_PORT
+    value: 9090
+  - key: CONSOLE_MINIO_SERVER
+    fromService:
+      name: minio-server
+      type: web
+      property: host
