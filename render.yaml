@@ -25,24 +25,24 @@ services:
   - key: PORT
     value: 9000
 
-# - type: web
-#   name: minio-console
-#   runtime: docker
-#   repo: https://github.com/minio/console.git
-#   dockerfilePath: ./Dockerfile
-#   dockerContext: /
-#   autoDeploy: false
-#   envVars:
-#   - key: CONSOLE_PBKDF_PASSPHRASE
-#     generateValue: true
-#   - key: CONSOLE_PBKDF_SALT
-#     generateValue: true
-#   - key: NODE_VERSION
-#     value: 20.12.1
-#   - key: CONSOLE_PORT
-#     value: 9090
-#   - key: CONSOLE_MINIO_SERVER
-#     fromService:
-#       name: minio-server
-#       type: web
-#       property: host
+- type: web
+  name: minio-console
+  runtime: docker
+  repo: https://github.com/minio/console.git
+  dockerfilePath: ./Dockerfile
+  dockerContext: /
+  autoDeploy: false
+  envVars:
+  - key: CONSOLE_PBKDF_PASSPHRASE
+    generateValue: true
+  - key: CONSOLE_PBKDF_SALT
+    generateValue: true
+  - key: NODE_VERSION
+    value: 20.12.1
+  - key: CONSOLE_PORT
+    value: 9090
+  - key: CONSOLE_MINIO_SERVER
+    fromService:
+      name: minio-server
+      type: web
+      property: host
