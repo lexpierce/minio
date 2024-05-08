@@ -26,6 +26,29 @@ services:
   - key: CONSOLE_PORT
     value: 9090
 
+- type: web
+  plan: starter
+  name: minio-console
+  runtime: docker
+  repo: http://github.com/lexpierce/minio
+  dockerContext: /
+  dockerfilePath: ./Dockerfile
+  envVars:
+  - key: HOST
+    value: "0.0.0.0"
+  - key: PORT
+    value: 10000
+  - key: MINIO_HOST
+    fromService:
+      name: minio-server
+      type: web
+      property: host
+  - key: MINIO_PORT
+    fromService:
+      name: minio-server
+      type: web
+      property: port
+    
 # - type: web
 #   plan: starter
 #   name: minio-console
