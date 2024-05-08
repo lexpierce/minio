@@ -17,8 +17,6 @@ services:
     generateValue: true
   - key: MINIO_ROOT_PASSWORD
     generateValue: true
-  # - key: MINIO_BROWSER
-  #   value: "off"
   - key: HOST
     value: "0.0.0.0"
   - key: PORT
@@ -47,7 +45,7 @@ services:
     fromService:
       name: minio-server
       type: web
-      property: CONSOLE_PORT
+      envVarKey: CONSOLE_PORT
     
 # - type: web
 #   plan: starter
