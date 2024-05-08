@@ -1,5 +1,5 @@
 server {
-    listen ${PORT}:
+    listen ${PORT};
 
     location / {
 		proxy_pass http://${MINIO_HOST}:${MINIO_PORT};
