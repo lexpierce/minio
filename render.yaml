@@ -31,6 +31,7 @@ services:
   repo: https://github.com/lexpierce/console.git
   dockerfilePath: ./Dockerfile
   dockerContext: /
+  dockerCommand: /bin/bash -c CONSOLE_MINIO_SERVER=http://$MINIO_HOST /console server --port $PORT
   autoDeploy: false
   envVars:
   - key: CONSOLE_PBKDF_PASSPHRASE
