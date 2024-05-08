@@ -43,11 +43,11 @@ services:
       name: minio-server
       type: web
       property: host
-  - key: MINIO_PORT
+  - key: MINIO_CONSOLE_PORT
     fromService:
       name: minio-server
       type: web
-      property: port
+      property: CONSOLE_PORT
     
 # - type: web
 #   plan: starter
