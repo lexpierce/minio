@@ -1,13 +1,12 @@
 services:
 - type: web
-  plan: standard
+  plan: starter
   name: minio-server
-  region: virginia
   healthCheckPath: /minio/health/live
   runtime: image
   image:
     url: docker.io/minio/minio:latest
-  dockerCommand: minio server /data --address $HOST:$PORT
+  dockerCommand: minio server /data --address $HOST:$PORT --console-address $HOST:$CONSOLE_PORT
   autoDeploy: false
   disk:
     name: data
@@ -18,37 +17,38 @@ services:
     generateValue: true
   - key: MINIO_ROOT_PASSWORD
     generateValue: true
-  - key: MINIO_BROWSER
-    value: "off"
+  # - key: MINIO_BROWSER
+  #   value: "off"
   - key: HOST
     value: "0.0.0.0"
   - key: PORT
     value: 9000
-
-- type: web
-  name: minio-console
-  runtime: docker
-  repo: https://github.com/lexpierce/console.git
-  dockerfilePath: ./Dockerfile
-  dockerContext: /
-  dockerCommand: /bin/bash -c CONSOLE_MINIO_SERVER=https://$MINIO_HOST.onrender.com ./console server --port $CONSOLE_PORT
-  autoDeploy: false
-  envVars:
-  - key: CONSOLE_PBKDF_PASSPHRASE
-    generateValue: true
-  - key: CONSOLE_PBKDF_SALT
-    generateValue: true
-  - key: NODE_VERSION
-    value: 20.12.1
   - key: CONSOLE_PORT
     value: 9090
-  - key: MINIO_HOST
-    fromService:
-      name: minio-server
-      type: web
-      property: host
-  # - key: MINIO_PORT
-  #   fromService:
-  #     name: minio-server
-  #     type: web
-  #     property: port
+
+# - type: web
+#   plan: starter
+#   name: minio-console
+#   runtime: docker
+#   repo: https://github.com/minio/console.git
+#   dockerfilePath: ./Dockerfile
+#   dockerContext: /
+#   dockerCommand: /bin/bash -c CONSOLE_MINIO_SERVER=https://$MINIO_HOST:$MINIO_PORT ./console server --port $CONSOLE_PORT
+#   autoDeploy: false
+#   envVars:
+#   - key: CONSOLE_PBKDF_PASSPHRASE
+#     generateValue: true
+#   - key: CONSOLE_PBKDF_SALT
+#     generateValue: true
+#   - key: NODE_VERSION
+#     value: 20.12.1
+#   - key: MINIO_HOST
+#     fromService:
+#       name: minio-server
+#       type: web
+#       property: host
+#   - key: MINIO_PORT
+#     fromService:
+#       name: minio-server
+#       type: web
+#       property: port
