@@ -28,7 +28,7 @@ services:
 - type: web
   name: minio-console
   runtime: docker
-  repo: https://github.com/minio/console.git
+  repo: https://github.com/lexpierce/console.git
   dockerfilePath: ./Dockerfile
   dockerContext: /
   autoDeploy: false
